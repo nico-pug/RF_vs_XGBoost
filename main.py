@@ -15,7 +15,7 @@ rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 
 # XGBoost
 xgb_model = xgb.XGBClassifier(
-    n_estimators=141,        # Usiamo il numero ottimale che hai trovato!
+    n_estimators=141,
     learning_rate=0.05,
     max_depth=3,
     use_label_encoder=False,
@@ -23,30 +23,31 @@ xgb_model = xgb.XGBClassifier(
     random_state=42
 )
 
-modelli = {
+models = {
     'Random Forest': rf_model,
     'XGBoost': xgb_model
 }
 
 # 3. Cross-Validation
 risultati = {}
-print("Esecuzione Cross-Validation in corso...")
+print("Cross-Validation running...")
 
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
 
-for nome, modello in modelli.items():
-    scores = cross_val_score(modello, X, y, cv=kfold, scoring='accuracy')
-    risultati[nome] = scores
-    print(f"{nome}: Media = {scores.mean():.4f} (+/- {scores.std():.4f})")
+for name, model in models.items():
+    scores = cross_val_score(model, X, y, cv=kfold, scoring='accuracy')
+    results[name] = scores
+    print(f"{name}: Media = {scores.mean():.4f} (+/- {scores.std():.4f})")
 
 # 4. Boxplot Generation
 plt.figure(figsize=(10, 6))
-plt.boxplot(risultati.values(), labels=risultati.keys(), patch_artist=True)
-plt.title('Confronto Finale: Random Forest vs XGBoost')
-plt.ylabel('Accuratezza')
+plt.boxplot(results.values(), labels=results.keys(), patch_artist=True)
+plt.title('Final Comparison: Random Forest vs XGBoost')
+plt.ylabel('Accuracy')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 
 # Save
-plt.savefig('confronto_rf_xgboost.png')
+plt.savefig('rf_vs_xgboost.png')
 
 plt.show()
+
