@@ -21,7 +21,7 @@ L'analisi dell'importanza delle feature di XGBoost ha rivelato i fattori critici
 2. **Worst Concave Points (`f27`)**: Un indicatore morfologico chiave.
 3. **Mean Texture (`f1`)**.
 
-!(./images/features_importance.png)
+![Features Importance](./images/features_importance.png)
 
 ## 🛠️ Tecnologie
 * **Python 3**
@@ -32,4 +32,5 @@ L'analisi dell'importanza delle feature di XGBoost ha rivelato i fattori critici
 ## 🚀 Come replicare
 1. Clona il repository.
 2. Installa le dipendenze: `pip install xgboost scikit-learn matplotlib pandas`.
+
 3. Lancia lo script: `python confronto_ensemble.py`.
